@@ -1,0 +1,42 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ flow_dify_webapp_conversation.project_name }}"
+  labels:
+    app: "{{ flow_dify_webapp_conversation.project_name }}"
+spec:
+  type: NodePort
+  ports:
+    - port: 5001
+      targetPort: 3000
+  selector:
+    app: "{{ flow_dify_webapp_conversation.project_name }}"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ flow_dify_webapp_conversation.project_name }}"
+  labels:
+    app: "{{ flow_dify_webapp_conversation.project_name }}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "{{ flow_dify_webapp_conversation.project_name }}"
+  template:
+    metadata:
+      labels:
+        app: "{{ flow_dify_webapp_conversation.project_name }}"
+    spec:
+      containers:
+        - name: "{{ flow_dify_webapp_conversation.project_name }}"
+          image: steven57/dify-webapp-conversation:0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: "{{ flow_dify_webapp_conversation.project_name }}"
+            - secretRef:
+                name: "{{ flow_dify_webapp_conversation.project_name }}"
