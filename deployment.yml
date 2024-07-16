@@ -38,5 +38,3 @@ spec:
           envFrom:
             - configMapRef:
                 name: "{{ flow_dify_webapp_conversation.project_name }}"
-            - secretRef:
-                name: "{{ flow_dify_webapp_conversation.project_name }}"
