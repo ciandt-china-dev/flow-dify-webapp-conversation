@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import produce, { setAutoFreeze } from 'immer'
 import { useBoolean, useGetState } from 'ahooks'
+import { local } from '../../store'
 import useConversation from '@/hooks/use-conversation'
 import Toast from '@/app/components/base/toast'
 import Sidebar from '@/app/components/sidebar'
@@ -58,6 +59,11 @@ const Main: FC = () => {
     }
   }, [])
 
+  // useEffect(() => {
+  //   const appId = local.get('appId')
+  //   if (!appId)
+  //     window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2ef8799c2a79ecae&redirect_uri=http://ciandtbot-test.platform.ciandt.tech:7860/redirect&response_type=code&scope=snsapi_base&state=STATE&agentid=1000049&connect_redirect=1#wechat_redirect'
+  // }, [])
   /*
   * conversation info
   */
@@ -101,7 +107,6 @@ const Main: FC = () => {
   const handleConversationSwitch = () => {
     if (!inited)
       return
-
     // update inputs of current conversation
     let notSyncToStateIntroduction = ''
     let notSyncToStateInputs: Record<string, any> | undefined | null = {}
@@ -171,6 +176,9 @@ const Main: FC = () => {
   const [chatList, setChatList, getChatList] = useGetState<ChatItem[]>([])
   const chatListDomRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
+    if (chatList.length === 0)
+      handleConversationIdChange('-1')
+
     // scroll to bottom
     if (chatListDomRef.current)
       chatListDomRef.current.scrollTop = chatListDomRef.current.scrollHeight
@@ -632,18 +640,20 @@ const Main: FC = () => {
         )}
         {/* main */}
         <div className='flex-grow flex flex-col h-[calc(100vh_-_3rem)] overflow-y-auto'>
-          <ConfigSence
-            conversationName={conversationName}
-            hasSetInputs={hasSetInputs}
-            isPublicVersion={isShowPrompt}
-            siteInfo={APP_INFO}
-            promptConfig={promptConfig}
-            onStartChat={handleStartChat}
-            canEidtInpus={canEditInpus}
-            savedInputs={currInputs as Record<string, any>}
-            onInputsChange={setCurrInputs}
-          ></ConfigSence>
-
+          <div className='text-gray-900 h-10'></div>
+          <div className='hidden'>
+            <ConfigSence
+              conversationName={conversationName}
+              hasSetInputs={hasSetInputs}
+              isPublicVersion={isShowPrompt}
+              siteInfo={APP_INFO}
+              promptConfig={promptConfig}
+              onStartChat={handleStartChat}
+              canEidtInpus={canEditInpus}
+              savedInputs={currInputs as Record<string, any>}
+              onInputsChange={setCurrInputs}
+            ></ConfigSence>
+          </div>
           {
             hasSetInputs && (
               <div className='relative grow h-[200px] pc:w-[794px] max-w-full mobile:w-full pb-[66px] mx-auto mb-3.5 overflow-hidden'>

@@ -47,6 +47,9 @@ export const fetchConversations = async () => {
 export const fetchChatList = async (conversationId: string) => {
   return get('messages', { params: { conversation_id: conversationId, limit: 20, last_id: '' } })
 }
+export const fetchAppInfo = async (code: string) => {
+  return get('app-info', { params: { code } })
+}
 
 // init value. wait for server update
 export const fetchAppParams = async () => {

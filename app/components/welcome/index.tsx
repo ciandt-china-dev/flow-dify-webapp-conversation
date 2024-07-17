@@ -142,10 +142,12 @@ const Welcome: FC<IWelcomeProps> = ({
   const handleChat = () => {
     if (!canChat())
       return
-
     onStartChat(inputs)
   }
-
+  useEffect(() => {
+    if (!hasSetInputs)
+      handleChat()
+  }, [hasSetInputs])
   const renderNoVarPanel = () => {
     if (isPublicVersion) {
       return (
