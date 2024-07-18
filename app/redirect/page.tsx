@@ -6,11 +6,10 @@ import { fetchAppInfo } from '@/service'
 
 const Redirect: FC = () => {
   const [user, setUser] = useState('')
-  const [test, setTest] = useState('')
   const fetch = async (code: string) => {
     const data: any = await fetchAppInfo(code)
     console.log(data, 'ooo')
-    setUser(data?.userid)
+    setUser(data?.UserId)
   }
   useEffect(() => {
     const searchURL = location.search
