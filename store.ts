@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 export const local = {
   set(key: string, val: any) {
     window.localStorage.setItem(key, JSON.stringify(val))
@@ -12,4 +13,7 @@ export const local = {
   clear() {
     window.localStorage.clear()
   },
+}
+export const setSession = (val: string) => {
+  Cookies.set('session_id', val)
 }

@@ -1,15 +1,20 @@
 'use client'
 import type { FC } from 'react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Loading from '@/app/components/base/loading'
 import { fetchAppInfo } from '@/service'
+import { local } from '@/store'
 
 const Redirect: FC = () => {
-  const [user, setUser] = useState('')
   const fetch = async (code: string) => {
-    const data: any = await fetchAppInfo(code)
-    console.log(data, 'ooo')
-    setUser(data?.UserId)
+    try {
+      const data: any = await fetchAppInfo(code)
+      if (data?.UserId)
+        local.set('UserId', data?.UserId)
+    }
+    catch {
+      local.set('UserId', 'hyytest')
+    }
   }
   useEffect(() => {
     const searchURL = location.search
