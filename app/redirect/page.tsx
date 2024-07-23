@@ -9,25 +9,23 @@ const Redirect: FC = () => {
   const fetch = async (code: string) => {
     try {
       const data: any = await fetchAppInfo(code)
-      if (data?.UserId)
+      if (data?.UserId) {
         local.set('UserId', data?.UserId)
+        window.location.href = '/'
+      }
     }
     catch {
-      local.set('UserId', 'hyytest')
     }
   }
   useEffect(() => {
     const searchURL = location.search
     const params = new URLSearchParams(searchURL)
     const valueObj = Object.fromEntries(params)
-    console.log(valueObj)
     fetch(valueObj.code)
   }, [])
 
   return (
-    <><div>{user}</div>
-      <Loading type='app' />
-    </>
+    <Loading type='app' />
   )
 }
 
