@@ -22,7 +22,7 @@ const Header: FC<IHeaderProps> = ({
       {isMobile
         ? (
           <div
-            className='flex items-center justify-center h-8 w-8 cursor-pointer'
+            className='hidden flex items-center justify-center h-8 w-8 cursor-pointer'
             onClick={() => onShowSideBar?.()}
           >
             <Bars3Icon className="h-4 w-4 text-gray-500" />
@@ -35,7 +35,7 @@ const Header: FC<IHeaderProps> = ({
       </div>
       {isMobile
         ? (
-          <div className='flex items-center justify-center h-8 w-8 cursor-pointer'
+          <div className='hidden flex items-center justify-center h-8 w-8 cursor-pointer'
             onClick={() => onCreateNewChat?.()}
           >
             <PencilSquareIcon className="h-4 w-4 text-gray-500" />
