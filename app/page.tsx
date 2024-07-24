@@ -12,9 +12,8 @@ const App: FC<IMainProps> = ({
 }: any) => {
   const [render, setRender] = useState(false)
   useEffect(() => {
-    if (!local.get('UserId')) {
-      window.location.href
-        = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2ef8799c2a79ecae&redirect_uri=http://ciandtbot-test.platform.ciandt.tech:7860/redirect&response_type=code&scope=snsapi_base&state=STATE&agentid=1000049&connect_redirect=1#wechat_redirect'
+    if (local.get('UserId')) {
+      window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${process.env.NEXT_PUBLIC_WX_APP_ID}&redirect_uri=${process.env.NEXT_PUBLIC_APP_BASE_URL}/redirect&response_type=code&scope=snsapi_base&state=STATE&agentid=1000049&connect_redirect=1#wechat_redirect`
     }
     else {
       setSession(local.get('UserId'))

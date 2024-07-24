@@ -5,7 +5,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import produce, { setAutoFreeze } from 'immer'
 import { useBoolean, useGetState } from 'ahooks'
-import { local } from '../../store'
 import useConversation from '@/hooks/use-conversation'
 import Toast from '@/app/components/base/toast'
 import Sidebar from '@/app/components/sidebar'
@@ -58,12 +57,6 @@ const Main: FC = () => {
       setAutoFreeze(true)
     }
   }, [])
-
-  // useEffect(() => {
-  //   const appId = local.get('appId')
-  //   if (!appId)
-  //     window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2ef8799c2a79ecae&redirect_uri=http://ciandtbot-test.platform.ciandt.tech:7860/redirect&response_type=code&scope=snsapi_base&state=STATE&agentid=1000049&connect_redirect=1#wechat_redirect'
-  // }, [])
   /*
   * conversation info
   */
