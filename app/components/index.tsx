@@ -632,7 +632,7 @@ const Main: FC = () => {
           </div>
         )}
         {/* main */}
-        <div className='flex-grow flex flex-col h-[calc(100vh_-_3rem)] overflow-y-auto'>
+        <div className='flex-grow flex flex-col h-[calc(100vh_-_7rem)] overflow-y-auto'>
           <div className='text-gray-900 h-10'></div>
           <div className='hidden'>
             <ConfigSence
